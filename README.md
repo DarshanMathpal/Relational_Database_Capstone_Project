@@ -42,7 +42,7 @@ It focuses on structuring data for users, content, and interactions to support s
 
 ## 🌍 Problem Statement
 
-This project focuses on solving key challenges in modern streaming platforms:
+This project focuses on solving key challenges in streaming platforms:
 
 - Limited access to on-demand entertainment  
 - Difficulty in discovering relevant content  
