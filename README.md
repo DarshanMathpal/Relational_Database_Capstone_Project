@@ -135,6 +135,12 @@ CREATE TABLE Ratings (
 ```
 ---
 
+## 📚 Key Learnings
+- Designed scalable relational database structures
+- Applied normalization techniques for efficient storage
+- Understood real-world data modeling for streaming platforms
+- Improved SQL skills for querying structured data
+
 ## 📜 License
 Available for educational purposes.
 
