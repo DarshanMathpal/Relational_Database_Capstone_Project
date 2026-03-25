@@ -81,13 +81,106 @@ Detailed contents of the project include:
 
 ---
 
+## 📊 Project Implementation
+
+### 🧱 Database Schema
+
+```sql
+CREATE TABLE Users (
+    user_id SERIAL PRIMARY KEY,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE Profiles (
+    profile_id SERIAL PRIMARY KEY,
+    user_id INT NOT NULL,
+    profile_name VARCHAR(100),
+    age_group VARCHAR(50),
+    FOREIGN KEY (user_id) REFERENCES Users(user_id)
+);
+
+CREATE TABLE Genres (
+    genre_id SERIAL PRIMARY KEY,
+    genre_name VARCHAR(100)
+);
+
+CREATE TABLE Content (
+    content_id SERIAL PRIMARY KEY,
+    title VARCHAR(200),
+    content_type VARCHAR(50),
+    release_year INT,
+    genre_id INT,
+    FOREIGN KEY (genre_id) REFERENCES Genres(genre_id)
+);
+
+CREATE TABLE Watch_History (
+    history_id SERIAL PRIMARY KEY,
+    profile_id INT NOT NULL,
+    content_id INT NOT NULL,
+    watched_at TIMESTAMP,
+    FOREIGN KEY (profile_id) REFERENCES Profiles(profile_id),
+    FOREIGN KEY (content_id) REFERENCES Content(content_id)
+);
+
+CREATE TABLE Ratings (
+    rating_id SERIAL PRIMARY KEY,
+    profile_id INT NOT NULL,
+    content_id INT NOT NULL,
+    rating INT CHECK (rating >= 1 AND rating <= 5),
+    FOREIGN KEY (profile_id) REFERENCES Profiles(profile_id),
+    FOREIGN KEY (content_id) REFERENCES Content(content_id)
+);
+```
+---
+
+## 📊 Sample SQL Queries
+
+1. Top Rated Content
+```sql
+SELECT c.title, AVG(r.rating) AS avg_rating
+FROM Ratings r
+JOIN Content c ON r.content_id = c.content_id
+GROUP BY c.title
+ORDER BY avg_rating DESC;
+
+3. Most Watched Content
+SELECT c.title, COUNT(*) AS watch_count
+FROM Watch_History w
+JOIN Content c ON w.content_id = c.content_id
+GROUP BY c.title
+ORDER BY watch_count DESC;
+
+4. Content Distribution by Genre
+SELECT g.genre_name, COUNT(*) AS total_content
+FROM Content c
+JOIN Genres g ON c.genre_id = g.genre_id
+GROUP BY g.genre_name;
+
+5. Average Rating per Genre
+SELECT g.genre_name, AVG(r.rating) AS avg_rating
+FROM Ratings r
+JOIN Content c ON r.content_id = c.content_id
+JOIN Genres g ON c.genre_id = g.genre_id
+GROUP BY g.genre_name;
+
+6. User Activity (Watch Count per Profile)
+SELECT p.profile_name, COUNT(*) AS total_watched
+FROM Watch_History w
+JOIN Profiles p ON w.profile_id = p.profile_id
+GROUP BY p.profile_name
+ORDER BY total_watched DESC;
+
+---
+
 ## 📚 Key Learnings
 
 - Designed scalable relational database structures  
 - Applied normalization techniques for efficient storage  
 - Understood real-world data modeling for streaming platforms  
 - Improved SQL skills for querying structured data
-
+```
 ---
 
 ## 📜 License
