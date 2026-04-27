@@ -141,9 +141,6 @@ CREATE TABLE Ratings (
 - Understood real-world data modeling for streaming platforms
 - Improved SQL skills for querying structured data
 
-## 📜 License
-Available for educational purposes.
-
 ---
 
 ## 📧 Contact
