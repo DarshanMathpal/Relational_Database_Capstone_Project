@@ -1,8 +1,10 @@
 # 🎬 Amazon Prime Video Data Modeling & SQL Analysis
 
+---
 ## 📊 ER Diagram
 ![ER Diagram](https://github.com/user-attachments/assets/f5fd983e-80ac-4971-b283-783b4d8558a9)
 
+---
 ## Overview
 This project presents a real-world relational database design and analysis for Amazon Prime Video.  
 It focuses on structuring data for users, content, and interactions to support scalable streaming and personalized recommendations.
